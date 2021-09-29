@@ -10,17 +10,24 @@ import dal.MentorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Mentee;
+import model.Mentor;
 import model.UserCommon;
 
 /**
  *
  * @author Admin
  */
-public class SignUp2Servlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +46,10 @@ public class SignUp2Servlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignUp2Servlet</title>");            
+            out.println("<title>Servlet SignupServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignUp2Servlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SignupServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,10 +64,19 @@ public class SignUp2Servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    String now() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat simpleformat = new SimpleDateFormat("dd/MMMM/yyyy hh:mm:s");
+        Format f = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = f.format(new Date());
+        return strDate;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("SignUp2.jsp").forward(request, response);
+        request.setAttribute("now", new SignUpServlet().now());
+        request.getRequestDispatcher("SignUp.jsp").forward(request, response);
     }
 
     /**
@@ -100,14 +116,9 @@ public class SignUp2Servlet extends HttpServlet {
             u.setPhone(ph);
             u.setSex(Integer.parseInt(s));
             u.setRole(Integer.parseInt(r));
-            ud.create(u);
-            if(u.getRole()==1){
-                tod.createMentor(u);
-            }
-            if(u.getRole()==2){
-                ted.createMentee(u);
-            }
-            response.sendRedirect("signin");
+            HttpSession session = request.getSession();
+            session.setAttribute("user", u);
+            response.sendRedirect("UserAuthentication");
         }
     }
 

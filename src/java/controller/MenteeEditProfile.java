@@ -5,28 +5,27 @@
  */
 package controller;
 
+import ShareData.FileHandling;
 import dal.MenteeDAO;
-import dal.MentorDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Mentee;
-import model.Mentor;
-import model.UserCommon;
 
 /**
  *
  * @author Admin
  */
-public class SignUpServlet extends HttpServlet {
+
+@MultipartConfig()
+@WebServlet(name = "MenteeEditProfile", urlPatterns = {"/user/mentee/editprofile"})
+public class MenteeEditProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +44,10 @@ public class SignUpServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignupServlet</title>");
+            out.println("<title>Servlet MenteeEditProfile</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignupServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MenteeEditProfile at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,19 +62,10 @@ public class SignUpServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String now() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat simpleformat = new SimpleDateFormat("dd/MMMM/yyyy hh:mm:s");
-        Format f = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = f.format(new Date());
-        return strDate;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("now", new SignUpServlet().now());
-        request.getRequestDispatcher("SignUp.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -90,33 +80,27 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String e = request.getParameter("email");
-        String p = request.getParameter("password");
-        String n = request.getParameter("name");
+        request.setCharacterEncoding("utf-8");
+        HttpSession session = request.getSession();
+         FileHandling fh = new FileHandling();
+        Mentee m = (Mentee) session.getAttribute("user");
+        MenteeDAO md = new MenteeDAO();
+        String nameSave = "imgAvt_" + m.getMenteeID();
+        String imgAvtPath = fh.uploadFile(request, response, "imgAvt", nameSave);
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
         String dob = request.getParameter("dob");
-        String ph = request.getParameter("phone");
-        String s = request.getParameter("sex");
-        String r = request.getParameter("role");
-        UserDAO ud = new UserDAO();
-        MenteeDAO ted = new MenteeDAO();
-        MentorDAO tod = new MentorDAO();
-        UserCommon a = ud.getEmail(e);
-        UserCommon b = ud.getPhone(ph);
-        if (a != null || b!=null) {
-            request.setAttribute("error", "Email hoặc số điện thoại đã tồn tại");
-            request.getRequestDispatcher("SignUp.jsp").forward(request, response);
-        } else {
-            UserCommon u = new UserCommon();
-            u.setEmail(e);
-            u.setPassword(p);
-            u.setName(n);
-            u.setDob(dob);
-            u.setPhone(ph);
-            u.setSex(Integer.parseInt(s));
-            u.setRole(Integer.parseInt(r));
-            response.sendRedirect("signup2");
-        }
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String description = request.getParameter("description");
+        m.setImg(imgAvtPath);
+        m.setName(name);
+        m.setEmail(email);
+        m.setDob(dob);
+        m.setAddress(address);
+        m.setPhone(phone);
+        m.setDescription(description);
+        md.updateMentee(m);
     }
 
     /**

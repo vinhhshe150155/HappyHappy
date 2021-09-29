@@ -20,7 +20,7 @@ public class FileHandling {
     public String uploadFile(HttpServletRequest request, HttpServletResponse response, String formImgName, String nameSave)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        final String path = request.getServletContext().getRealPath("/images");
+        final String path = request.getServletContext().getRealPath("/user/assets/images/user");
         Part filePart = request.getPart(formImgName);
         OutputStream out = null;
         InputStream filecontent = null;
@@ -45,7 +45,7 @@ public class FileHandling {
             if (filecontent != null) {
                 filecontent.close();
             }
-            return "images\\" + fileName;
+            return "/HappyHappy/user/assets/images/user/" + fileName;
         }
     }
     private String getFileExtension(final Part part) {

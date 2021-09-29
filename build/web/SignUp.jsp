@@ -134,7 +134,7 @@
                                         <label class="form-label" for="email">Email address: <span style="color:red">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <input id="email" type="email" name="email"
-                                                   pattern="^[a-z]|[a-z]\\w+@\\w+(\\.\\w+){1,3}$" required="" class="form-control form-control-prepended" placeholder="Your email address">
+                                                   required="" class="form-control form-control-prepended" placeholder="Your email address">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <span class="far fa-envelope"></span>

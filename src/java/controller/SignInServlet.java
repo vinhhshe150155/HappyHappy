@@ -5,6 +5,8 @@
  */
 package controller;
 
+import dal.MenteeDAO;
+import dal.MentorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,22 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.UserCommon;
-
-/**
- *
- * @author Admin
- */
 public class SignInServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,7 +25,7 @@ public class SignInServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SigninServlet</title>");            
+            out.println("<title>Servlet SigninServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SigninServlet at " + request.getContextPath() + "</h1>");
@@ -46,57 +33,41 @@ public class SignInServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("SignIn.jsp").forward(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String m=request.getParameter("email");
-        String p=request.getParameter("password");
-        UserDAO db=new UserDAO();
-        UserCommon a=db.getAccount(m, p);
-        if(a==null){
-            //chua co hoac go nham            
+        String m = request.getParameter("email");
+        String p = request.getParameter("password");
+        UserDAO db = new UserDAO();
+        UserCommon u = db.getAccount(m, p);
+        if (u == null) {          
             request.setAttribute("error", "tài khoản hoặc mật khẩu không đúng");
             request.getRequestDispatcher("SignIn.jsp").forward(request, response);
-        }else{
-            response.sendRedirect("user/student-dashboard.html");
+        } else {
+            if (u.getRole() == 1) {
+                MentorDAO md = new MentorDAO();
+                session.setAttribute("user", md.getMentorByEmail(u.getEmail()));
+                request.getRequestDispatcher("user/mentor/mentor-dashboard.jsp").forward(request, response);
+
+            } else {
+                MenteeDAO mtd = new MenteeDAO();
+                session.setAttribute("user", mtd.getMenteeByEmail(u.getEmail()));
+                request.getRequestDispatcher("user/mentee/mentee-dashboard.jsp").forward(request, response);
+            }
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
