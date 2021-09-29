@@ -9,15 +9,15 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.userCommon;
+import model.UserCommon;
 
 
 /**
  *
  * @author Admin
  */
-public class userDAO extends DBContext {
-    public userCommon getAccount(String email, String password){
+public class UserDAO extends DBContext {
+    public UserCommon getAccount(String email, String password){
         String sql="select * from userCommon where email=? and password=?";
         try{
             PreparedStatement st=connection.prepareCall(sql);
@@ -25,7 +25,7 @@ public class userDAO extends DBContext {
             st.setString(2, password);
             ResultSet rs=st.executeQuery();
             if(rs.next()){
-                return new userCommon(rs.getInt("userID"),
+                return new UserCommon(rs.getInt("userID"),
                                     rs.getString("name"),
                                     rs.getString("password"),
                                     rs.getString("email"),
@@ -46,14 +46,14 @@ public class userDAO extends DBContext {
         return null;    
     }
     
-    public userCommon getEmail(String email){
+    public UserCommon getEmail(String email){
         String sql="select * from userCommon where email=?";
         try{
             PreparedStatement st=connection.prepareCall(sql);
             st.setString(1, email);
             ResultSet rs=st.executeQuery();
             if(rs.next()){
-                return new userCommon(rs.getInt("userID"),
+                return new UserCommon(rs.getInt("userID"),
                                     rs.getString("name"),
                                     rs.getString("password"),
                                     rs.getString("email"),
@@ -73,14 +73,14 @@ public class userDAO extends DBContext {
         }
         return null;
     }
-    public userCommon getPhone(String phone){
+    public UserCommon getPhone(String phone){
         String sql="select * from userCommon where phone=?";
         try{
             PreparedStatement st=connection.prepareCall(sql);
             st.setString(1, phone);
             ResultSet rs=st.executeQuery();
             if(rs.next()){
-                return new userCommon(rs.getInt("userID"),
+                return new UserCommon(rs.getInt("userID"),
                                     rs.getString("name"),
                                     rs.getString("password"),
                                     rs.getString("email"),
@@ -100,18 +100,18 @@ public class userDAO extends DBContext {
         }
         return null;
     }
-    public int create(userCommon a){
+    public int create(UserCommon u){
         String sql="insert into userCommon(name,password,email,dob,sex,address,phone,role) values (?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement st=connection.prepareCall(sql);
-            st.setNString(1, a.getName());
-            st.setString(2, a.getPassword());
-            st.setString(3, a.getEmail());
-            st.setString(4, a.getDob());
-            st.setInt(5, a.getSex());
-            st.setString(6, a.getAddress());
-            st.setString(7, a.getPhone());
-            st.setInt(8, a.getRole());
+            st.setNString(1, u.getName());
+            st.setString(2, u.getPassword());
+            st.setString(3, u.getEmail());
+            st.setString(4, u.getDob());
+            st.setInt(5, u.getSex());
+            st.setString(6, u.getAddress());
+            st.setString(7, u.getPhone());
+            st.setInt(8, u.getRole());
             return st.executeUpdate();
         }catch(SQLException e){
             System.out.println(e);

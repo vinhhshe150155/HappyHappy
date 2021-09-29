@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Admin
  */
-public class userCommon {
+public class UserCommon {
     private int userID;
     private String name,password,email,dob;
     private int sex;
@@ -20,10 +20,10 @@ public class userCommon {
     private Date createTime;
     private int role;
 
-    public userCommon() {
+    public UserCommon() {
     }
 
-    public userCommon(int userID, String name, String password, String email, String dob, int sex, String address, String phone, String imgAvt, String description, String status, int moneyLeft, Date createTime, int role) {
+    public UserCommon(int userID, String name, String password, String email, String dob, int sex, String address, String phone, String imgAvt, String description, String status, int moneyLeft, Date createTime, int role) {
         this.userID = userID;
         this.name = name;
         this.password = password;
@@ -154,7 +154,7 @@ public class userCommon {
 
     @Override
     public String toString() {
-        return "userCommon{" + "userID=" + userID + ", name=" + name + ", password=" + password + ", email=" + email + ", dob=" + dob + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", imgAvt=" + imgAvt + ", description=" + description + ", status=" + status + ", moneyLeft=" + moneyLeft + ", createTime=" + createTime + ", role=" + role + '}';
+        return "UserCommon{" + "userID=" + userID + ", name=" + name + ", password=" + password + ", email=" + email + ", dob=" + dob + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", imgAvt=" + imgAvt + ", description=" + description + ", status=" + status + ", moneyLeft=" + moneyLeft + ", createTime=" + createTime + ", role=" + role + '}';
     }
 
     

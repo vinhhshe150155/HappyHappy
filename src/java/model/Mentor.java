@@ -46,6 +46,9 @@ public class Mentor {
         this.createTime = createTime;
     }
 
+    public Mentor() {
+    }
+
     public int getMentorID() {
         return mentorID;
     }
@@ -204,6 +207,11 @@ public class Mentor {
 
     public void setListMajor(List<Major> listMajor) {
         this.listMajor = listMajor;
+    }
+
+    @Override
+    public String toString() {
+        return "Mentor{" + "mentorID=" + mentorID + ", name=" + name + ", password=" + password + ", email=" + email + ", dob=" + dob + ", sex=" + sex + ", education=" + education + ", yearExperiment=" + yearExperiment + ", address=" + address + ", phone=" + phone + ", intro=" + intro + ", imgAvt=" + imgAvt + ", imgAuthen1=" + imgAuthen1 + ", imgAuthen2=" + imgAuthen2 + ", description=" + description + ", authen=" + authen + ", status=" + status + ", moneyLeft=" + moneyLeft + ", createTime=" + createTime + ", listMajor=" + listMajor + '}';
     }
 
    

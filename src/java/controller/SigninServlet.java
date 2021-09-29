@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dal.userDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.userCommon;
+import model.UserCommon;
 
 /**
  *
  * @author Admin
  */
-public class SigninServlet extends HttpServlet {
+public class SignInServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -78,8 +78,8 @@ public class SigninServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String m=request.getParameter("email");
         String p=request.getParameter("password");
-        userDAO db=new userDAO();
-        userCommon a=db.getAccount(m, p);
+        UserDAO db=new UserDAO();
+        UserCommon a=db.getAccount(m, p);
         if(a==null){
             //chua co hoac go nham            
             request.setAttribute("error", "tài khoản hoặc mật khẩu không đúng");

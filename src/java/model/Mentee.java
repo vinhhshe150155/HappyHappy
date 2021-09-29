@@ -40,6 +40,9 @@ public class Mentee {
         this.createTime = createTime;
     }
 
+    public Mentee() {
+    }
+
     public int getMenteeID() {
         return menteeID;
     }
@@ -142,6 +145,11 @@ public class Mentee {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Mentee{" + "menteeID=" + menteeID + ", name=" + name + ", password=" + password + ", email=" + email + ", dob=" + dob + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", img=" + img + ", description=" + description + ", status=" + status + ", moneyLeft=" + moneyLeft + ", createTime=" + createTime + '}';
     }
     
 }

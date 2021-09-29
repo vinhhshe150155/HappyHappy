@@ -83,7 +83,7 @@
                     <form action="signin" method="post">
                         <div class="form-group">
                             <label class="form-label"
-                                   for="email">Your email address:</label>
+                                   for="email">Your email address:<span style="color:red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <input id="email"
                                        type="email"
@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label"
-                                   for="password">Your password:</label>
+                                   for="password">Your password:<span style="color:red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <input id="password"
                                        type="password"
@@ -129,7 +129,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-center text-black-50">
-                    Not yet a student? <a href="signup">Sign Up</a>
+                    Not yet an user? <a href="signup">Sign Up</a>
                 </div>
             </div>
         </div>

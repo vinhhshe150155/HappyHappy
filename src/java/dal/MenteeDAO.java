@@ -2,6 +2,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import model.Mentee;
+import model.UserCommon;
 
 public class MenteeDAO extends DBContext{
     
@@ -29,6 +30,17 @@ public class MenteeDAO extends DBContext{
             ps.setString(9, mentee.getStatus());
             ps.setInt(10, mentee.getMenteeID());
             return ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return 0;
+    }
+    public int createMentee(UserCommon u){
+        String sql="insert into mentee (userID) select userID from userCommon where email = ?";
+        try{
+            PreparedStatement st=connection.prepareCall(sql);
+            st.setString(1, u.getEmail());
+            return st.executeUpdate();
         }catch(SQLException e){
             System.out.println(e);
         }

@@ -14,6 +14,9 @@ public class Subject {
     private String subjectName;
     private String status;
 
+    public Subject() {
+    }
+
     public Subject(int subjectID, String subjectName, String status) {
         this.subjectID = subjectID;
         this.subjectName = subjectName;
@@ -42,6 +45,11 @@ public class Subject {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" + "subjectID=" + subjectID + ", subjectName=" + subjectName + ", status=" + status + '}';
     }
     
 }
