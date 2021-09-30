@@ -200,7 +200,7 @@
                                            width="40"></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item"
-                               href="student-account-edit.html">
+                               href="${pageContext.request.contextPath}/user/mentee/editprofile">
                                 <i class="material-icons">edit</i> Edit Account
                             </a>
                             <a class="dropdown-item"

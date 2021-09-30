@@ -53,13 +53,13 @@ public class ProcessAuthenticationCode extends HttpServlet {
                     MentorDAO md = new MentorDAO();
                     md.createMentor(u);
                     session.setAttribute("user", md.getMentorByEmail(u.getEmail()));
-                    request.getRequestDispatcher("user/instructor-dashboard.jsp").forward(request, response);
+                    request.getRequestDispatcher("user/mentor/mentor-dashboard.jsp").forward(request, response);
                     
                 }else{
                     MenteeDAO mtd = new MenteeDAO();
                     mtd.createMentee(u);
                     session.setAttribute("user", mtd.getMenteeByEmail(u.getEmail()));
-                    request.getRequestDispatcher("user/student-dashboard.jsp").forward(request, response);
+                    request.getRequestDispatcher("user/mentee/mentee-dashboard.jsp").forward(request, response);
                 }
                 
             }

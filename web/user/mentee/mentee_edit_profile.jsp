@@ -533,6 +533,7 @@
                                                             <label for="avatar"
                                                                    class="custom-file-label">Choose file</label>
                                                         </div>
+                                                        <img src="${user.img}" style="width: 50px; height: 50px" >
                                                     </div>
                                                 </div>
                                             </div>

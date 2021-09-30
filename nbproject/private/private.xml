@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/mentee/mentee_profile.jsp</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/mentee/mentee_header.jsp</file>
+            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/src/java/model/UserCommon.java</file>
+            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/src/java/controller/authentication/ProcessAuthenticationCode.java</file>
             <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/mentee/mentee_edit_profile.jsp</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/fixed-student-account-edit-profile.html</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/src/java/controller/MenteeEditProfile.java</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/mentee/mentee_tab.jsp</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/fixed-student-account-edit.html</file>
-            <file>file:/C:/Users/Admin/Desktop/SWP391/Project/Happy_ThaiBranch/HappyHappy/web/user/mentee/mentee-dashboard.jsp</file>
         </group>
     </open-files>
 </project-private>
